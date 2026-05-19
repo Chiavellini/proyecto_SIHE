@@ -1,0 +1,402 @@
+:root {
+    --primary-red: #ED2B2A;
+    --primary-red-hover: #D12322;
+    --text-main: #222222;
+    --text-muted: #737273;
+    --bg-light: #F4F4F4;
+    --border-color: #E2E2E2;
+    --font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-family);
+    color: var(--text-main);
+    line-height: 1.6;
+    background-color: #FFFFFF;
+}
+
+/* Typography */
+h1, h2, h3 {
+    line-height: 1.2;
+    margin-bottom: 1rem;
+}
+
+h1.petition-title {
+    font-size: 2.25rem;
+    font-weight: 800;
+    margin-bottom: 1.5rem;
+}
+
+h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-top: 1.5rem;
+}
+
+p {
+    margin-bottom: 1rem;
+}
+
+a {
+    color: var(--primary-red);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Navbar */
+.navbar {
+    border-bottom: 1px solid var(--border-color);
+    padding: 1rem 0;
+    position: sticky;
+    top: 0;
+    background-color: white;
+    z-index: 100;
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--text-main);
+}
+
+.logo-dot {
+    color: var(--primary-red);
+}
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+}
+
+.nav-links a {
+    color: var(--text-main);
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.nav-links a:hover {
+    color: var(--primary-red);
+    text-decoration: none;
+}
+
+/* Buttons */
+.btn {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    border-radius: 4px;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.2s;
+    border: none;
+}
+
+.btn-primary {
+    background-color: var(--primary-red);
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-red-hover);
+}
+
+.btn-outline {
+    background-color: transparent;
+    color: var(--text-main);
+    border: 1px solid var(--border-color);
+}
+
+.btn-outline:hover {
+    border-color: var(--text-main);
+}
+
+.btn-block {
+    width: 100%;
+}
+
+/* Layout */
+.main-container {
+    max-width: 1000px;
+    margin: 2rem auto;
+    padding: 0 1.5rem;
+    display: flex;
+    gap: 3rem;
+}
+
+.content-left {
+    flex: 1;
+    min-width: 0; /* Prevent flex overflow */
+}
+
+.content-right {
+    width: 320px;
+    flex-shrink: 0;
+}
+
+/* Creator Info */
+.creator-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    background-color: #E2E2E2;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    color: var(--text-muted);
+}
+
+.creator-details {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+.creator-details strong {
+    color: var(--text-main);
+}
+
+/* Hero Image */
+.hero-image-container {
+    margin-bottom: 2rem;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.hero-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+}
+
+/* Petition Description */
+.petition-description {
+    font-size: 1.1rem;
+    color: #333;
+}
+
+.petition-description ul {
+    margin-left: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.petition-description li {
+    margin-bottom: 0.5rem;
+}
+
+/* Sidebar */
+.sticky-sidebar {
+    position: sticky;
+    top: 5rem;
+}
+
+/* Progress Section */
+.progress-section {
+    margin-bottom: 2rem;
+}
+
+.signatures-count {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.signatures-count #current-signatures {
+    color: var(--primary-red);
+    font-size: 1.5rem;
+}
+
+.signatures-count .goal {
+    font-size: 1rem;
+    color: var(--text-muted);
+    font-weight: 400;
+}
+
+.progress-bar-container {
+    height: 12px;
+    background-color: var(--bg-light);
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: 0.5rem;
+}
+
+.progress-bar {
+    height: 100%;
+    background-color: var(--primary-red);
+    width: 0%; /* Set via JS */
+    transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.progress-stats {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+/* Sign Form */
+.sign-form-container {
+    background-color: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    margin-bottom: 2rem;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-row {
+    display: flex;
+    gap: 1rem;
+}
+
+.form-row .form-group {
+    flex: 1;
+}
+
+input[type="text"],
+input[type="email"] {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    font-size: 1rem;
+    font-family: inherit;
+    transition: border-color 0.2s;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus {
+    outline: none;
+    border-color: var(--primary-red);
+}
+
+.form-checkbox {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.form-checkbox input {
+    margin-top: 0.3rem;
+}
+
+.form-checkbox label {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.privacy-notice {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-top: 1rem;
+    text-align: center;
+}
+
+/* Recent Supporters */
+.recent-supporters h3 {
+    margin-bottom: 1rem;
+}
+
+.supporters-list {
+    list-style: none;
+}
+
+.supporters-list li {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border-color);
+    animation: fadeIn 0.5s ease-out;
+}
+
+.supporter-avatar {
+    width: 32px;
+    height: 32px;
+    background-color: #E2E2E2;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    flex-shrink: 0;
+}
+
+.supporter-info {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+.supporter-name {
+    font-weight: 700;
+    color: var(--text-main);
+}
+
+.supporter-time {
+    display: block;
+    font-size: 0.8rem;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes highlightAdded {
+    0% { background-color: rgba(237, 43, 42, 0.2); }
+    100% { background-color: transparent; }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .main-container {
+        flex-direction: column;
+    }
+    
+    .content-right {
+        width: 100%;
+    }
+
+    .nav-links {
+        display: none;
+    }
+}
