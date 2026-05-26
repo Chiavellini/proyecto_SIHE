@@ -105,7 +105,16 @@ export default function RedeliveryForm() {
   );
   const [email, setEmail] = useState('');
   const [verification, setVerification] = useState(initialState);
+  const [scheduledDate, setScheduledDate] = useState('');
+  const [scheduledSlot, setScheduledSlot] = useState('');
   const [submitState, setSubmitState] = useState({ status: 'idle', message: '' });
+
+  const TIME_SLOT_LABELS = {
+    morning: '9:00 a 12:00',
+    midday: '12:00 a 15:00',
+    afternoon: '15:00 a 18:00',
+    any: 'Cualquier horario',
+  };
 
   const fieldStatus = VERIFICATION_FIELDS.map((field) => ({
     field,
@@ -122,6 +131,8 @@ export default function RedeliveryForm() {
   const resetForm = () => {
     setEmail('');
     setVerification(initialState);
+    setScheduledDate('');
+    setScheduledSlot('');
     setSubmitState({ status: 'idle', message: '' });
   };
 
@@ -148,6 +159,25 @@ export default function RedeliveryForm() {
       });
       return;
     }
+    // Fire-and-log the confirmation email. We don't block the success state
+    // on it — if SMTP fails, the user's request is already saved in the DB
+    // and someone can follow up manually.
+    const dateMatch = upcomingDates.find(
+      (d) => d.toISOString().slice(0, 10) === scheduledDate,
+    );
+    const dateLabel = dateMatch ? formatDateLabel(dateMatch) : 'Sin especificar';
+    const timeLabel = TIME_SLOT_LABELS[scheduledSlot] ?? 'Sin especificar';
+    const orderNumber = verification.input1 || 'Sin especificar';
+    supabase.functions
+      .invoke('send-redelivery-confirmation', {
+        body: { email, orderNumber, dateLabel, timeLabel },
+      })
+      .then(({ error: emailError }) => {
+        if (emailError) {
+          console.warn('Confirmation email failed:', emailError);
+        }
+      })
+      .catch((err) => console.warn('Confirmation email failed:', err));
     setSubmitState({ status: 'success', message: 'Tu correo quedó registrado.' });
   };
 
@@ -288,7 +318,10 @@ export default function RedeliveryForm() {
         <div className="form-row">
           <label>
             Fecha preferida
-            <select defaultValue="">
+            <select
+              value={scheduledDate}
+              onChange={(e) => setScheduledDate(e.target.value)}
+            >
               <option value="" disabled>
                 Selecciona un día
               </option>
@@ -304,14 +337,17 @@ export default function RedeliveryForm() {
           </label>
           <label>
             Horario sugerido
-            <select defaultValue="">
+            <select
+              value={scheduledSlot}
+              onChange={(e) => setScheduledSlot(e.target.value)}
+            >
               <option value="" disabled>
                 Selecciona un rango
               </option>
-              <option value="morning">9:00 a 12:00</option>
-              <option value="midday">12:00 a 15:00</option>
-              <option value="afternoon">15:00 a 18:00</option>
-              <option value="any">Cualquier horario</option>
+              <option value="morning">{TIME_SLOT_LABELS.morning}</option>
+              <option value="midday">{TIME_SLOT_LABELS.midday}</option>
+              <option value="afternoon">{TIME_SLOT_LABELS.afternoon}</option>
+              <option value="any">{TIME_SLOT_LABELS.any}</option>
             </select>
           </label>
         </div>
