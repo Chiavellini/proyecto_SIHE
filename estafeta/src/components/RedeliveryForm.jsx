@@ -230,7 +230,7 @@ export default function RedeliveryForm() {
           </label>
           <label>
             Teléfono de contacto
-            <input autoComplete="tel" placeholder="10 dígitos" type="tel" />
+            <input autoComplete="tel" placeholder="Teléfono" type="tel" />
           </label>
         </div>
         <label>
@@ -238,6 +238,16 @@ export default function RedeliveryForm() {
           <input
             autoComplete="street-address"
             placeholder="Calle, número, colonia, alcaldía o municipio"
+            type="text"
+          />
+        </label>
+        <label>
+          Código postal
+          <input
+            autoComplete="postal-code"
+            inputMode="numeric"
+            maxLength={5}
+            placeholder="00000"
             type="text"
           />
         </label>
