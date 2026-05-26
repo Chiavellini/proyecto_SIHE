@@ -298,10 +298,6 @@ export default function RedeliveryForm() {
             rows="3"
           />
         </label>
-        <label className="checkbox-row">
-          <input type="checkbox" />
-          <span>Confirmo que habrá una persona disponible para recibir el paquete.</span>
-        </label>
       </section>
 
       {submitState.status !== 'idle' ? (
