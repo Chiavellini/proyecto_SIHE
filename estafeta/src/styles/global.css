@@ -955,7 +955,7 @@ img {
   gap: clamp(24px, 4vw, 46px);
   grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
   min-height: clamp(520px, 60vw, 690px);
-  padding: clamp(24px, 4vw, 36px) 0;
+  padding: clamp(28px, 4vw, 56px) clamp(32px, 6vw, 120px);
 }
 
 .redelivery-hero h1 {
