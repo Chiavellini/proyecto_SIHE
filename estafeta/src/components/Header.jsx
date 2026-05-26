@@ -3,7 +3,7 @@ import { Link, NavLink } from 'react-router-dom';
 import { accountLinks, asset, navigation } from '../data/siteData.js';
 import MaterialIcon from './MaterialIcon.jsx';
 
-function NavDropdown({ item, onNavigate }) {
+function NavDropdown({ item, onNavigate, isExpanded, onToggle }) {
   if (item.path) {
     return (
       <NavLink className="main-nav-link" to={item.path} onClick={onNavigate}>
@@ -13,10 +13,15 @@ function NavDropdown({ item, onNavigate }) {
   }
 
   return (
-    <div className={`main-nav-item ${item.columns ? 'has-mega' : ''}`}>
-      <button className="main-nav-link" type="button">
+    <div className={`main-nav-item ${item.columns ? 'has-mega' : ''}${isExpanded ? ' is-expanded' : ''}`}>
+      <button
+        aria-expanded={isExpanded}
+        className="main-nav-link"
+        type="button"
+        onClick={onToggle}
+      >
         <span>{item.label}</span>
-        <MaterialIcon name="expand_more" />
+        <MaterialIcon name={isExpanded ? 'expand_less' : 'expand_more'} />
       </button>
       <div className={`nav-dropdown ${item.columns ? 'mega-menu' : ''}`}>
         {item.columns
@@ -46,11 +51,17 @@ export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [accountOpen, setAccountOpen] = useState(false);
+  const [expandedNavItem, setExpandedNavItem] = useState(null);
 
   const closeMenus = () => {
     setMenuOpen(false);
     setSearchOpen(false);
     setAccountOpen(false);
+    setExpandedNavItem(null);
+  };
+
+  const toggleNavItem = (label) => {
+    setExpandedNavItem((current) => (current === label ? null : label));
   };
 
   return (
@@ -106,7 +117,13 @@ export default function Header() {
         <div className="container nav-grid">
           <nav aria-label="Principal" className="main-nav">
             {navigation.map((item) => (
-              <NavDropdown item={item} key={item.label} onNavigate={closeMenus} />
+              <NavDropdown
+                item={item}
+                key={item.label}
+                onNavigate={closeMenus}
+                isExpanded={expandedNavItem === item.label}
+                onToggle={() => toggleNavItem(item.label)}
+              />
             ))}
           </nav>
 
