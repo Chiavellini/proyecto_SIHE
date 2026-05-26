@@ -24,7 +24,6 @@ const STEPS = {
   delivery: {
     number: 3,
     title: 'Datos de entrega',
-    subtitle: 'Quién recibe y a qué dirección queremos llegar.',
   },
   schedule: {
     number: 4,
@@ -158,7 +157,7 @@ export default function RedeliveryForm() {
           <span className="form-step-badge">{String(STEPS.email.number).padStart(2, '0')}</span>
           <div>
             <h3>{STEPS.email.title}</h3>
-            <p>{STEPS.email.subtitle}</p>
+            {STEPS.email.subtitle ? <p>{STEPS.email.subtitle}</p> : null}
           </div>
         </header>
         <label>
@@ -180,7 +179,7 @@ export default function RedeliveryForm() {
           <span className="form-step-badge">{String(STEPS.verify.number).padStart(2, '0')}</span>
           <div>
             <h3>{STEPS.verify.title}</h3>
-            <p>{STEPS.verify.subtitle}</p>
+            {STEPS.verify.subtitle ? <p>{STEPS.verify.subtitle}</p> : null}
           </div>
         </header>
 
@@ -219,7 +218,7 @@ export default function RedeliveryForm() {
           <span className="form-step-badge">{String(STEPS.delivery.number).padStart(2, '0')}</span>
           <div>
             <h3>{STEPS.delivery.title}</h3>
-            <p>{STEPS.delivery.subtitle}</p>
+            {STEPS.delivery.subtitle ? <p>{STEPS.delivery.subtitle}</p> : null}
           </div>
         </header>
 
@@ -258,7 +257,7 @@ export default function RedeliveryForm() {
           <span className="form-step-badge">{String(STEPS.schedule.number).padStart(2, '0')}</span>
           <div>
             <h3>{STEPS.schedule.title}</h3>
-            <p>{STEPS.schedule.subtitle}</p>
+            {STEPS.schedule.subtitle ? <p>{STEPS.schedule.subtitle}</p> : null}
           </div>
         </header>
 
