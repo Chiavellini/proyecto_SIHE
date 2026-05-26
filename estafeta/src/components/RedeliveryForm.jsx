@@ -247,7 +247,7 @@ export default function RedeliveryForm() {
             autoComplete="postal-code"
             inputMode="numeric"
             maxLength={5}
-            placeholder="00000"
+            placeholder="Código postal"
             type="text"
           />
         </label>
