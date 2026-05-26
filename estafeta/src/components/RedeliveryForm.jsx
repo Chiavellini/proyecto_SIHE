@@ -119,6 +119,12 @@ export default function RedeliveryForm() {
     setVerification((prev) => ({ ...prev, [key]: raw }));
   };
 
+  const resetForm = () => {
+    setEmail('');
+    setVerification(initialState);
+    setSubmitState({ status: 'idle', message: '' });
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (!emailValid) {
@@ -144,6 +150,24 @@ export default function RedeliveryForm() {
     }
     setSubmitState({ status: 'success', message: 'Tu correo quedó registrado.' });
   };
+
+  if (submitState.status === 'success') {
+    return (
+      <div className="redelivery-form redelivery-form-success" role="status" aria-live="polite">
+        <div className="form-success-icon">
+          <MaterialIcon name="check_circle" />
+        </div>
+        <h3>Solicitud enviada</h3>
+        <p>
+          Recibimos tu reprogramación. Te contactaremos al correo registrado en cuanto
+          tengamos una ventana de entrega disponible.
+        </p>
+        <ActionButton type="button" onClick={resetForm}>
+          Enviar otra solicitud
+        </ActionButton>
+      </div>
+    );
+  }
 
   return (
     <form className="redelivery-form" onSubmit={handleSubmit} noValidate>

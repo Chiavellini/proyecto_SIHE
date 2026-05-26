@@ -1306,6 +1306,46 @@ img {
   font-size: 20px;
 }
 
+.redelivery-form-success {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: clamp(36px, 5vw, 56px) clamp(24px, 3vw, 40px);
+  text-align: center;
+}
+
+.form-success-icon {
+  align-items: center;
+  background: rgba(44, 168, 2, 0.12);
+  border-radius: 50%;
+  color: var(--green);
+  display: inline-flex;
+  height: 72px;
+  justify-content: center;
+  width: 72px;
+}
+
+.form-success-icon .material-symbols-outlined {
+  font-size: 44px;
+}
+
+.redelivery-form-success h3 {
+  color: var(--text);
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin: 4px 0 0;
+}
+
+.redelivery-form-success p {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.55;
+  margin: 0 0 8px;
+  max-width: 340px;
+}
+
 .redelivery-side-note {
   align-self: stretch;
   display: flex;
