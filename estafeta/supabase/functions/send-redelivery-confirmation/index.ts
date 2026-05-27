@@ -158,8 +158,7 @@ serve(async (req) => {
     'Tu solicitud de reprogramación quedó registrada.\n\n' +
     `• Número de pedido: ${orderNumber}\n` +
     `• Fecha: ${dateLabel}\n` +
-    `• Horario: ${timeLabel}\n\n` +
-    '— Estafeta';
+    `• Horario: ${timeLabel}`;
 
   try {
     await sendMail({

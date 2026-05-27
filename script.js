@@ -1,7 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Initial state
-    let signatures = 14852;
-    const goal = 15000;
+    const BASE_INSCRIPTIONS = 321;
+    const STORAGE_KEY = 'raffle-inscriptions';
+    const goal = 500;
+    let extraSignatures = Number(localStorage.getItem(STORAGE_KEY) || 0);
+    let signatures = BASE_INSCRIPTIONS + extraSignatures;
 
     // DOM Elements
     const form = document.getElementById('petition-form');
@@ -22,8 +24,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const lastName = document.getElementById('last-name').value.trim();
 
         if (firstName && lastName) {
-            // Increment signature count
-            signatures++;
+            // Increment signature count and persist it across reloads
+            extraSignatures++;
+            localStorage.setItem(STORAGE_KEY, String(extraSignatures));
+            signatures = BASE_INSCRIPTIONS + extraSignatures;
             updateProgress();
 
             // Add new supporter to list
@@ -42,14 +46,14 @@ document.addEventListener('DOMContentLoaded', () => {
             }).then(response => {
                 // Change button state to show success
                 const btn = form.querySelector('button[type="submit"]');
-                btn.textContent = "¡Gracias por firmar!";
+                btn.textContent = "¡Gracias por inscribirte!";
                 btn.style.backgroundColor = "#2e7d32"; // Green success color
                 btn.disabled = true;
             }).catch(error => {
                 console.error("Error al enviar a Formspree:", error);
                 // Aún así mostrar éxito al usuario para no romper la experiencia
                 const btn = form.querySelector('button[type="submit"]');
-                btn.textContent = "¡Gracias por firmar!";
+                btn.textContent = "¡Gracias por inscribirte!";
                 btn.style.backgroundColor = "#2e7d32";
                 btn.disabled = true;
             });
@@ -90,7 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
         li.innerHTML = `
             <div class="supporter-avatar">${initials}</div>
             <div class="supporter-info">
-                <span class="supporter-name">${fullName}</span> ha firmado esta petición
+                <span class="supporter-name">${fullName}</span> se ha inscrito en la rifa
                 <span class="supporter-time">Justo ahora</span>
             </div>
         `;

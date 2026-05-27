@@ -37,9 +37,8 @@ const STEPS = {
 const VERIFICATION_FIELDS = [
   {
     key: 'input1',
-    label: 'input1',
+    label: 'Numero de Pedido',
     helper: '10 a 22 caracteres',
-    placeholder: 'ABC1234567890',
     maxLength: 22,
     inputMode: 'text',
     validate: (v) => /^[A-Za-z0-9]{10,22}$/.test(v),
